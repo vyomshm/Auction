@@ -8,7 +8,8 @@ class Command(BaseCommand):
     help = 'Runs through email queue and sends emails'
     
     def handle(self, *args, **options):
-        self.send_auction_email()     
+        print('hey')
+        # self.send_auction_email()    
 
     def send_auction_email(self):
         auctions = AuctionItem.AuctionManager.active()
