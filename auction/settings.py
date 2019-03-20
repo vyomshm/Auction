@@ -37,6 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'auction.bid',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'djoser',
+    'pendulum',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +55,16 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'auction.urls'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ),
+}
 
 TEMPLATES = [
     {
@@ -99,13 +114,19 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# sendgrid email integration
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'vcrizpy'
+EMAIL_HOST_PASSWORD = 'PdUyWMPGi6NbeEp'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -118,3 +139,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Configure Django App for Heroku.
+import django_heroku
+django_heroku.settings(locals())
